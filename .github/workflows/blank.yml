@@ -27,10 +27,11 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        run: | 
-          echo Hello, world!
-          $version = "3.2."+(4000+$($Env:GITHUB_RUN_NUMBER))+".0"
-          echo $version
+        env:
+          NUM: ${{ github.run_number }}
+        run: |
+          echo ::set-env name=GITHUB_RUN_NUMBER_WITH_OFFSET::$(($NUM+200))
+      - run: echo $GITHUB_RUN_NUMBER_WITH_OFFSET
 
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
