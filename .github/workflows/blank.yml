@@ -31,10 +31,16 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Echo ref name
+        if: github.ref_type == 'branch'
         shell: bash
         run: |
           echo ${{ github.ref }}
           echo ${{ github.ref_name }}
+
+      - name: Echo tag name
+        if: github.ref_type == 'tag'
+        shell: bash
+        run: |
           echo version: ${GITHUB_REF_NAME#v}
 
       # Runs a set of commands using the runners shell
