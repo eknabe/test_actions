@@ -45,7 +45,7 @@ jobs:
           echo "next line"
 
       # Runs a set of commands using the runners shell
-      - name: 'kalle ${GITHUB_REF_NAME#v}'
+      - name: ${GITHUB_REF_NAME#v}
         shell: bash
         run: |
           echo ${{github.ref}}
