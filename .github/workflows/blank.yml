@@ -17,7 +17,10 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
-    runs-on: [ ubuntu-22.04, windows-2022 ]
+    runs-on: ${{ matrix.os }}  # Use the matrix variable for the OS
+    strategy:
+      matrix:
+        os: [ubuntu-2204, windows-2022]  # Define two OS targets
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
