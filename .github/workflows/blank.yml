@@ -26,7 +26,7 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Echo ref name
-        run: >
+        run: |
           echo ${{ github.ref }}
           echo ${{ github.ref_name }}
 
