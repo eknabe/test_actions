@@ -18,7 +18,8 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [ubuntu-22.04, windows-2022]  # Define two OS targets
+        # os: [ubuntu-22.04, windows-2022]  # Define two OS targets
+        os: [ubuntuwindows-2022]  # Define two OS targets
 
     # The type of runner that the job will run on
     runs-on: ${{ matrix.os }}  # Use the matrix variable for the OS
@@ -30,6 +31,7 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Echo ref name
+        shell: bash
         run: |
           echo ${{ github.ref }}
           echo ${{ github.ref_name }}
@@ -37,6 +39,7 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
+        shell: bash
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
