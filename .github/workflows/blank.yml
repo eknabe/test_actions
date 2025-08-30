@@ -19,7 +19,7 @@ jobs:
     strategy:
       matrix:
         # os: [ubuntu-22.04, windows-2022]  # Define two OS targets
-        os: [ubuntuwindows-2022]  # Define two OS targets
+        os: [windows-2022]  # Define two OS targets
 
     # The type of runner that the job will run on
     runs-on: ${{ matrix.os }}  # Use the matrix variable for the OS
