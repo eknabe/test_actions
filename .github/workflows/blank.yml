@@ -42,10 +42,11 @@ jobs:
         shell: bash
         run: |
           echo version: ${GITHUB_REF_NAME#v}
-          echo "next line"
+          echo "ESMINI_VERSION=${GITHUB_REF_NAME#v}" >> $GITHUB_ENV
+          echo Version: ${{env.ESMINI_VERSION}}
 
       # Runs a set of commands using the runners shell
-      - name: ${GITHUB_REF_NAME#v}
+      - name: 'esmini version ${{env.ESMINI_VERSION}}'
         shell: bash
         run: |
           echo ${{github.ref}}
