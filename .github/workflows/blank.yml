@@ -32,7 +32,7 @@ jobs:
 
       - name: clone esmini
         run: |
-          git clone --branch traffic_lights_sq --depth 1 https://github.com/esmini/esmini
+          git clone --branch traffic_lights_sq --depth 1 https://github.com/eknabe/esmini_fork
 
       - name: build OSG
         run: |
