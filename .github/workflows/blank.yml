@@ -16,6 +16,7 @@ on:
 jobs:
   build:
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-22.04, macos-14, windows-2022]
 
@@ -24,6 +25,12 @@ jobs:
     steps:
       # Checks-out your repository in case we need it for debugging
       - uses: actions/checkout@v3
+
+      - name: Install OSG dependencies on Ubuntu
+        if: runner.os == 'Linux'
+        shell: bash
+        run: sudo apt-get install -y -q libx11-dev libxrandr-dev libxinerama-dev libgl1-mesa-dev libegl1-mesa-dev
+          && sudo apt-get install -y -q libglu1-mesa-dev xorg-dev mesa-utils
 
       - name: clone esmini
         run: |
