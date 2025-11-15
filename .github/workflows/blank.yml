@@ -20,7 +20,7 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [macos-13]
+        os: [macos-14]
 
     # The type of runner that the job will run on
     runs-on: ${{ matrix.os }}  # Use the matrix variable for the OS
