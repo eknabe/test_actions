@@ -1,8 +1,7 @@
-# This is a basic workflow to help you get started with Actions
+# Build OpenSceneGraph (OSG) libraries for esmini on supported platforms
 
 name: CI
 
-# Controls when the workflow will run
 on:
   push:
     # Triggers the workflow on push for the "main" branch or version tags
@@ -14,20 +13,16 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
   build:
     strategy:
       matrix:
-        os: [macos-14]
+        os: [ubuntu-22.04, macos-14, windows-2022]
 
-    # The type of runner that the job will run on
     runs-on: ${{ matrix.os }}  # Use the matrix variable for the OS
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      # Checks-out your repository in case we need it for debugging
       - uses: actions/checkout@v3
 
       - name: clone esmini
@@ -43,8 +38,8 @@ jobs:
       - name: Upload
         uses: actions/upload-artifact@v4
         with:
-          name: osg_mac.7z
-          path: osg_mac.7z
+          name: osg lib package
+          path: osg/osg_*.7z
 
       - name: Debugging with tmate
         uses: mxschmitt/action-tmate@v3
