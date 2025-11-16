@@ -18,8 +18,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-#        os: [ubuntu-22.04, windows-2022, macos-13]
-        os: [macos-13]
+        os: [ubuntu-22.04, windows-2022, macos-13]
 
     runs-on: ${{ matrix.os }}  # Use the matrix variable for the OS
 
@@ -59,5 +58,5 @@ jobs:
           name: osg ${{ runner.os }} lib package
           path: osg/osg_*.7z
 
-      - name: Debugging with tmate
-        uses: mxschmitt/action-tmate@v3
+      # - name: Debugging with tmate
+      #   uses: mxschmitt/action-tmate@v3
