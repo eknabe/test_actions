@@ -43,7 +43,7 @@ jobs:
       - name: clone esmini
         shell: bash
         run: |
-          git clone --branch traffic_lights_sq --depth 1 https://github.com/eknabe/esmini_fork esmini
+          git clone --branch traffic_lights_sq2_cherry --depth 1 https://github.com/esmini/esmini esmini
 
       - name: build OSG
         shell: bash
