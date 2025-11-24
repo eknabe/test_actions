@@ -18,8 +18,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-#        os: [ubuntu-22.04, windows-2022, macos-13]
-        os: [macos-13]
+        os: [ubuntu-22.04, windows-2022, macos-13]
 
     runs-on: ${{ matrix.os }}  # Use the matrix variable for the OS
 
@@ -46,18 +45,18 @@ jobs:
         run: |
           git clone --branch traffic_lights_sq2_cherry --depth 1 https://github.com/esmini/esmini esmini
 
-      # - name: build OSG
-      #   shell: bash
-      #   run: |
-      #     mkdir osg
-      #     cd osg
-      #     ../esmini/scripts/generate_osg_libs.sh
+      - name: build OSG
+        shell: bash
+        run: |
+          mkdir osg
+          cd osg
+          ../esmini/scripts/generate_osg_libs.sh
 
-      # - name: Upload lib package
-      #   uses: actions/upload-artifact@v4
-      #   with:
-      #     name: osg ${{ runner.os }} lib package
-      #     path: osg/osg_*.7z
+      - name: Upload lib package
+        uses: actions/upload-artifact@v4
+        with:
+          name: osg ${{ runner.os }} lib package
+          path: osg/osg_*.7z
 
       - name: Debugging with tmate
         uses: mxschmitt/action-tmate@v3
