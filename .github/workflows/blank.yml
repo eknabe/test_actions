@@ -18,7 +18,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-22.04, windows-2022, macos-13]
+        os: [windows-2022]
 
     runs-on: ${{ matrix.os }}  # Use the matrix variable for the OS
 
@@ -26,38 +26,25 @@ jobs:
       # Checks-out your repository in case we need it for debugging
       - uses: actions/checkout@v3
 
-      - name: Install and use g++-9 on Ubuntu
-        if: runner.os == 'Linux'
-        shell: bash
-        run: sudo apt-get update -q
-          && sudo apt-get install -q -y gcc-9 g++-9
-          && sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 200
-          && sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-9 200
-
-      - name: Install OSG dependencies on Ubuntu
-        if: runner.os == 'Linux'
-        shell: bash
-        run: sudo apt-get install -y -q libx11-dev libxrandr-dev libxinerama-dev libgl1-mesa-dev libegl1-mesa-dev
-          && sudo apt-get install -y -q libglu1-mesa-dev xorg-dev mesa-utils
-
-      - name: clone esmini
-        shell: bash
-        run: |
-          git clone --branch traffic_lights_sq2_cherry --depth 1 https://github.com/esmini/esmini esmini
-
-      - name: build OSG
-        shell: bash
-        run: |
-          mkdir osg
-          cd osg
-          ../esmini/scripts/generate_osg_libs.sh
-
-      - name: Upload lib package
-        uses: actions/upload-artifact@v4
+      - name: Install Mesa3D - Windows
+        if: runner.os == 'Windows'
+        uses: ssciwr/setup-mesa-dist-win@v1
         with:
-          name: osg ${{ runner.os }} lib package
-          path: osg/osg_*.7z
+          version: '22.3.5'
+
+      - name: Install wglinfo - Windows
+        if: runner.os == 'Windows'
+        shell: cmd
+        run: curl.exe -L --output wglinfo64.exe --url https://github.com/gkv311/wglinfo/releases/download/22_03/wglinfo64.exe
+
+      - name: Output wglinfo - Windows
+        if: runner.os == 'Windows'
+        shell: cmd
+        env:
+          GALLIUM_DRIVER: llvmpipe
+        run: wglinfo64
 
       - name: Debugging with tmate
         if: failure()
         uses: mxschmitt/action-tmate@v3
+        
