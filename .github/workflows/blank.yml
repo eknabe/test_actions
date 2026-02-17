@@ -69,5 +69,5 @@ jobs:
       #     path: osg/osg_*.7z
 
       - name: Debugging with tmate
-        if: failure()
+        # if: failure()
         uses: mxschmitt/action-tmate@v3
