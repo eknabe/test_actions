@@ -46,18 +46,27 @@ jobs:
         run: |
           git clone --branch feature/angle_condition_rb --depth 1 https://github.com/esmini/esmini esmini
 
-      - name: build OSG
+      - name: build esmini
         shell: bash
         run: |
-          mkdir osg
-          cd osg
-          ../esmini/scripts/generate_osg_libs.sh
+          cd esmini
+          mkdir build
+          cd build
+          cmake .. -DCMAKE_BUILD_TYPE=Release
+          cmake --build . --config Release --target install
 
-      - name: Upload lib package
-        uses: actions/upload-artifact@v4
-        with:
-          name: osg ${{ runner.os }} lib package
-          path: osg/osg_*.7z
+      # - name: build OSG
+      #   shell: bash
+      #   run: |
+      #     mkdir osg
+      #     cd osg
+      #     ../esmini/scripts/generate_osg_libs.sh
+
+      # - name: Upload lib package
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: osg ${{ runner.os }} lib package
+      #     path: osg/osg_*.7z
 
       - name: Debugging with tmate
         if: failure()
