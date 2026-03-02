@@ -44,16 +44,16 @@ jobs:
       - name: clone esmini
         shell: bash
         run: |
-          git clone --branch feature/angle_condition_rb --depth 1 https://github.com/esmini/esmini esmini
+          git clone --branch feature/remove_gateway_rb --depth 1 https://github.com/esmini/esmini esmini
 
-      - name: build esmini
-        shell: bash
-        run: |
-          cd esmini
-          mkdir build
-          cd build
-          cmake .. -DCMAKE_BUILD_TYPE=Release
-          cmake --build . --config Release --target install
+      # - name: build esmini
+      #   shell: bash
+      #   run: |
+      #     cd esmini
+      #     mkdir build
+      #     cd build
+      #     cmake .. -DCMAKE_BUILD_TYPE=Release
+      #     cmake --build . --config Release --target install
 
       # - name: build OSG
       #   shell: bash
