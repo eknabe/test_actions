@@ -68,6 +68,19 @@ jobs:
       #     name: osg ${{ runner.os }} lib package
       #     path: osg/osg_*.7z
 
+      - name: build implot
+        shell: bash
+        run: |
+          mkdir implot
+          cd implot
+          ../esmini/scripts/generate_implot_libs.sh
+
+      - name: Upload lib package
+        uses: actions/upload-artifact@v4
+        with:
+          name: implot ${{ runner.os }} lib package
+          path: implot/implot_*.7z
+
       - name: Debugging with tmate
         # if: failure()
         uses: mxschmitt/action-tmate@v3
