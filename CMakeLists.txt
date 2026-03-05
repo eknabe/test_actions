@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.11)
+cmake_minimum_required(VERSION 3.15)
 
 project(
     pbtest
@@ -21,3 +21,7 @@ set_property(
     TARGET ${TARGET}
     PROPERTY VS_PACKAGE_REFERENCES
              "Google.Protobuf;3.22.1")
+
+set_property(
+    TARGET ${TARGET}
+    PROPERTY VS_NUGET_PACKAGE_RESTORE ON)
