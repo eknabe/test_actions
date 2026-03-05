@@ -20,7 +20,7 @@ set_target_properties(${TARGET} PROPERTIES
 set_property(
     TARGET ${TARGET}
     PROPERTY VS_PACKAGE_REFERENCES
-             "Google.Protobuf;3.22.1")
+             "Google.Protobuf_3.22.1")
 
 set_property(
     TARGET ${TARGET}

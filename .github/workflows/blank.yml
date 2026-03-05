@@ -6,7 +6,7 @@ name: CI
 on:
   push:
     # Triggers the workflow on push for the "main" branch or version tags
-    branches: [ "main" ]
+    branches: [ "**" ]
     tags: [ "v[0-9]+.[0-9]+.[0-9]+" ]
 
   # Allows you to run this workflow manually from the Actions tab
