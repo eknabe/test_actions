@@ -21,7 +21,3 @@ set_property(
     TARGET ${TARGET}
     PROPERTY VS_PACKAGE_REFERENCES
              "Google.Protobuf_3.22.1")
-
-set_property(
-    TARGET ${TARGET}
-    PROPERTY VS_NUGET_PACKAGE_RESTORE ON)
