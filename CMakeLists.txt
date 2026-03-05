@@ -14,9 +14,6 @@ add_executable(
     ${TARGET}
     ${SOURCES})
 
-set_target_properties(${TARGET} PROPERTIES
-    VS_DOTNET_TARGET_FRAMEWORK_VERSION "v4.7.2")
-
 set_property(
     TARGET ${TARGET}
     PROPERTY VS_PACKAGE_REFERENCES
