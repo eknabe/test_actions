@@ -18,8 +18,7 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [ubuntu-22.04, windows-2022]  # Define two OS targets
-        # os: [windows-2022]  # Define two OS targets
+        os: [windows-2022]  # Define two OS targets
 
     # The type of runner that the job will run on
     runs-on: ${{ matrix.os }}  # Use the matrix variable for the OS
@@ -29,24 +28,11 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
-      # Runs a single command using the runners shell
-      - name: Echo ref name
-        if: github.ref_type == 'branch'
-        shell: bash
-        run: |
-          echo ${{ github.ref }}
-          echo ${{ github.ref_name }}
-
-      - name: Echo tag name
-        if: github.ref_type == 'tag'
-        shell: bash
-        run: |
-          echo version: ${GITHUB_REF_NAME#v}
-          echo "ESMINI_VERSION=${GITHUB_REF_NAME#v}" >> $GITHUB_ENV
-          echo Version: ${{env.ESMINI_VERSION}}
-
       # Runs a set of commands using the runners shell
-      - name: 'esmini version ${{env.ESMINI_VERSION}}'
+      - name: 'build'
         shell: bash
         run: |
-          echo ${{github.ref}}
+          mkdir build
+          cd build
+          cmake .. -G "Visual Studio 17 2022" -T v142 -A x64
+          cmake --build . --config Release
