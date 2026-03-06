@@ -7,8 +7,14 @@ project(
 set(TARGET
     pbtest)
 
+file(
+    GLOB
+    OSI_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/osi3/*.cs)
+
 set(SOURCES
-    ${CMAKE_CURRENT_SOURCE_DIR}/pbtest.cs)
+    ${CMAKE_CURRENT_SOURCE_DIR}/pbtest.cs
+    ${OSI_SOURCES})
 
 add_executable(
     ${TARGET}
