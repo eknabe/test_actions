@@ -17,4 +17,4 @@ add_executable(
 set_property(
     TARGET ${TARGET}
     PROPERTY VS_PACKAGE_REFERENCES
-             "Google.Protobuf")
+             "Google.Protobuf_3.22.1")
