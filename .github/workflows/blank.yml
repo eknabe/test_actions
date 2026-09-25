@@ -13,6 +13,9 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
+env:
+  USE_TMATE: true
+
 jobs:
   build:
     strategy:
@@ -44,43 +47,12 @@ jobs:
       - name: clone esmini
         shell: bash
         run: |
-          git clone --branch feature/remove_gateway_rb --depth 1 https://github.com/esmini/esmini esmini
+          git clone --branch feature/pr-815-review_rb_fix_end_of_road --depth 1 https://github.com/eknabe/esmini_fork esmini
 
-      # - name: build esmini
-      #   shell: bash
-      #   run: |
-      #     cd esmini
-      #     mkdir build
-      #     cd build
-      #     cmake .. -DCMAKE_BUILD_TYPE=Release
-      #     cmake --build . --config Release --target install
-
-      # - name: build OSG
-      #   shell: bash
-      #   run: |
-      #     mkdir osg
-      #     cd osg
-      #     ../esmini/scripts/generate_osg_libs.sh
-
-      # - name: Upload lib package
-      #   uses: actions/upload-artifact@v4
-      #   with:
-      #     name: osg ${{ runner.os }} lib package
-      #     path: osg/osg_*.7z
-
-      - name: build implot
-        shell: bash
-        run: |
-          mkdir implot
-          cd implot
-          ../esmini/scripts/generate_implot_libs.sh
-
-      - name: Upload lib package
-        uses: actions/upload-artifact@v4
+      - name: Debugging with Upterm
+        if: ${{ env.USE_TMATE == 'true' }}
+        uses: owenthereal/action-upterm@v1
         with:
-          name: implot ${{ runner.os }} lib package
-          path: implot/implot_*.7z
+          limit-access-to-actor: true
+          wait-timeout-minutes: 15
 
-      - name: Debugging with tmate
-        # if: failure()
-        uses: mxschmitt/action-tmate@v3
