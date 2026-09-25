@@ -27,32 +27,9 @@ jobs:
     runs-on: ${{ matrix.os }}  # Use the matrix variable for the OS
 
     steps:
-      # Checks-out your repository in case we need it for debugging
-      - uses: actions/checkout@v3
-
-      - name: Install and use g++-9 on Ubuntu
-        if: runner.os == 'Linux'
-        shell: bash
-        run: sudo apt-get update -q
-          && sudo apt-get install -q -y gcc-9 g++-9
-          && sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 200
-          && sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-9 200
-
-      - name: Install OSG dependencies on Ubuntu
-        if: runner.os == 'Linux'
-        shell: bash
-        run: sudo apt-get install -y -q libx11-dev libxrandr-dev libxinerama-dev libgl1-mesa-dev libegl1-mesa-dev
-          && sudo apt-get install -y -q libglu1-mesa-dev xorg-dev mesa-utils
-
-      - name: clone esmini
-        shell: bash
-        run: |
-          git clone --branch feature/pr-815-review_rb_fix_end_of_road --depth 1 https://github.com/eknabe/esmini_fork esmini
-
-      - name: Debugging with Upterm
-        if: ${{ env.USE_TMATE == 'true' }}
+      # Add this step where you want execution to pause for debugging
+      - name: Setup Upterm Session
         uses: owenthereal/action-upterm@v1
         with:
-          limit-access-to-actor: true
+          ## Optional: Restrict SSH access only to your GitHub user's public SSH keys
           wait-timeout-minutes: 15
-
